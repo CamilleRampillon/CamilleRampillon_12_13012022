@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 /**
  * Used to fetch data 
@@ -32,3 +33,9 @@ export function useFetch(url) {
   }, [url])
   return { isLoading, data, error }
 }
+
+  // Prototypes
+
+  useFetch.propTypes = {
+    url: PropTypes.string.isRequired,
+  }

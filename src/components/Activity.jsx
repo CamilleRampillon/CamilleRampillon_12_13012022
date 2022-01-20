@@ -1,4 +1,5 @@
 import { useParams } from 'react-router'
+import PropTypes from 'prop-types'
 import { useFetch } from '../utils/hooks'
 import styled from 'styled-components'
 import colors from '../utils/style/colors'
@@ -22,8 +23,9 @@ import {
     background: ${colors.backgroundLight};
     margin-left: 150px;
     height: 335px;
-    width: 45%;
+    width: 70%;
     padding: 5px;
+    box-shadow: 0px 2px 4px 0px #00000005;
 `;
 
 const ActivityHeading = styled.div`
@@ -135,6 +137,8 @@ export default function Activity() {
         )
     }
     else {
+      console.log(data.data)
+      console.log(data.data.sessions)
       const sessions = data.data.sessions
     // Display Activity chart using RECHARTS
     return (
@@ -209,3 +213,10 @@ export default function Activity() {
       )
     }
   }
+
+    // Prototypes
+
+    CustomTooltip.propTypes = {
+      active: PropTypes.bool,
+      payload: PropTypes.array,
+    }
