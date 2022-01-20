@@ -6,6 +6,7 @@ import { useFetch } from '../utils/hooks'
 import LoadingIcon from '../components/LoadingIcon'
 import Activity from '../components/Activity'
 import KeyData from '../components/KeyData'
+import Average from '../components/Average'
 
 
 /**
@@ -40,6 +41,11 @@ const UserStats = styled.div`
   margin-left: 125px;
 `;
 
+const Analysis = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 /**
  * 
  * @function User
@@ -48,13 +54,13 @@ const UserStats = styled.div`
 
 export default function User() {
 
-  const  userId  = useParams().id
+  const { id } = useParams()
   
-  const mockData = `../${userId}.json`
-  // const apiData = `http://localhost:3000/user/${userId}/`
-  // const activity =`http://localhost:3000/user/${userId}/activity`
-  // const sessions = `http://localhost:3000/user/${userId}/average-sessions`
-  // const performance = `http://localhost:3000/user/${userId}/performance`
+  const mockData = `../${id}.json`
+  // const apiData = `http://localhost:3000/user/${id}/`
+  // const activity =`http://localhost:3000/user/${id}/activity`
+  // const sessions = `http://localhost:3000/user/${id}/average-sessions`
+  // const performance = `http://localhost:3000/user/${id}/performance`
   const { data, isLoading, error } = useFetch(mockData)
   if (error) {
     return <ErrorWrapper>Il y a un problème</ErrorWrapper>
@@ -74,7 +80,12 @@ export default function User() {
               <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
           </Welcome>
           <UserStats> 
-            <Activity />
+          <div>
+              <Activity />
+              <Analysis>
+                 <Average />
+              </Analysis>
+            </div>
             <KeyData healthData={details.keyData} />
           </UserStats> 
       </div>

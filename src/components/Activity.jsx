@@ -32,12 +32,12 @@ const ActivityHeading = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  color: #74798C;
+  color: ${colors.SecondaryText};
   font-size: 14px;
   font-weight: 500;
   
-  h1 {
-    color: black;
+  h2 {
+    color: ${colors.secondary};
     font-size: 15px;
     font-weight: 500;
     margin-right:20px;
@@ -118,11 +118,11 @@ const CustomTooltip = ({ active, payload }) => {
  */
 export default function Activity() {
   // Get ID from URL param
-    const  userId  = useParams().id
+  const { id } = useParams()
 
-    const mockActivityData = `../${userId}/activity.json`
+  const mockActivityData = `../${id}/activity.json`
 
-    // const activity =`http://localhost:3000/user/${userId}/activity`
+    // const activity =`http://localhost:3000/user/${id}/activity`
 
     // Fetch the data using HOOK useFetch
     // @returns @param {object} data, {boolean} isLoading and {boolean} error
@@ -144,7 +144,7 @@ export default function Activity() {
     return (
       <ActivityChartWrapper>
         <ActivityHeading>
-          <h1>Activité quotidienne</h1>
+          <h2>Activité quotidienne</h2>
             <ActivityLegend> 
               <BulletTwo>•</BulletTwo>	Poids (Kg) 
               <BulletOne>•</BulletOne> Calories brûlées (kCal)
@@ -166,7 +166,8 @@ export default function Activity() {
                 dataKey='day'
                 tickFormatter={TranformDate}
                 stroke= {`${colors.barChartText}`}
-                tickLine={false} />
+                tickLine={false} 
+                style={{ fontSize: '14px', }} />
 
               <YAxis
                 yAxisId='poids'
@@ -174,7 +175,10 @@ export default function Activity() {
                 orientation='right'
                 axisLine={false}
                 tickLine={false}
-                domain={['dataMin -3', 'dataMax + 3']}  />
+                domain={['dataMin -3', 'dataMax + 3']}
+                style={{
+                  fontSize: '14px',
+                }} />
 
               <YAxis
                 yAxisId='calories'
@@ -214,8 +218,10 @@ export default function Activity() {
     }
   }
 
-    // Prototypes
-
+    // Proptypes
+    TranformDate.propTypes = {
+      tickItem: PropTypes.string.isRequired ,
+    }
     CustomTooltip.propTypes = {
       active: PropTypes.bool,
       payload: PropTypes.array,

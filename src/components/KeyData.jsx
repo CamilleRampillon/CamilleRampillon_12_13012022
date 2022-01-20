@@ -11,7 +11,7 @@ import carbs from '../assets/icons/carbs.svg'
  * CSS for the component using styled.components
  */
 const HealthWrapper = styled.div`
-  color: ${colors.secondary};
+  color: ${colors.HealthDataText};
   display: flex;
   flex-direction: column;
   margin-left: 30px;
@@ -25,7 +25,7 @@ const HealthCard = styled.div`
     width: 258px;
     border-radius: 5px;
     box-shadow: 0px 2px 4px 0px #00000005;
-    background: #FBFBFB;
+    background: ${colors.backgroundLight};
     margin-bottom: 40px;
 `;
 
@@ -35,7 +35,7 @@ const HealthValue = styled.div`
     font-weight: 700;
     margin-left: 24px;
     p {
-        color: #74798C;
+        color: ${colors.SecondaryText};
         font-size: 14px;
         font-weight: 500;
         margin: unset;
@@ -49,29 +49,28 @@ const HealthValue = styled.div`
  * @returns {JSX}
  */
 
-export default function KeyData( {healthData} ) {
-    const categories = ['Calories', 'Protéines', 'Glucides', 'Lipides']
-    const icons = [calories, protiens, fats, carbs ]
-
+ export default function KeyData({ healthData }) {
+    const categories = ['Calories', 'Protéines', 'Glucides', 'Lipides'];
+    const icons = [calories, protiens, fats, carbs];
+  
     return (
-        <HealthWrapper>
-            {categories.map((cat, index) => (
-                <HealthCard key={cat}>
-                     <img src={icons[index]} alt=''/>
-                     <HealthValue>
-                        {healthData[Object.keys(healthData)[index]] + ' '}
-                        {index === 0 ? 'kCal' : 'g'}
-                        <p>{cat}</p>
-                    </HealthValue>
-                </HealthCard >
-            ))}
-        </HealthWrapper>
-    )
-}
-
-
-  // Prototypes
-
+      <HealthWrapper>
+        {categories.map((cat, index) => (
+          <HealthCard key={cat}>
+            <img src={icons[index]} alt='' />
+            <HealthValue>
+              {healthData[Object.keys(healthData)[index]] + ' '}
+              {index === 0 ? 'kCal' : 'g'}
+              <p>{cat}</p>
+            </HealthValue>
+          </HealthCard>
+        ))}
+      </HealthWrapper>
+    );
+  }
+  
+  // Proptypes
+  
   KeyData.propTypes = {
     healthData: PropTypes.object.isRequired,
-  }
+  };
