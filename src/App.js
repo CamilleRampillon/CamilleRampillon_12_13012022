@@ -1,32 +1,27 @@
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-//Components imports
-import Header from './components/Header'
-import SideNav from './components/SideNav'
-import User from './pages/User'
-import Error from './pages/Error'
-//Style import
-import './App.css';
+// component imports
+import  Header  from './components/Header'
+import WelcomePage from './pages/WelcomePage'
+import DashBoard from './pages/DashBoard'
+import  Error from './pages/Error'
 
 /**
  * Manages routes & renders pages
  * @function App
- * @returns JSX
+ * @returns {JSX}
  */
-function App() {
-  return (
+export default function App() {
+  return (   
     <Router>
-      <Header />
-      <SideNav />   
+      <Header />  
         <Switch>
-        <Route exact path="/user/:id" component={User}/>
-
-            <Route>
-              <Error />
-            </Route>
+          <Route exact path="/" component={WelcomePage}/>
+          <Route path="/user/:id" component={DashBoard}/>
+          <Route path="/profile" component={WelcomePage}/>
+          <Route path="/settings" component={WelcomePage}/>
+          <Route path="/community" component={WelcomePage}/>
+          <Route component={Error}/>
         </Switch> 
     </Router>  
   )
 }
-
-export default App;

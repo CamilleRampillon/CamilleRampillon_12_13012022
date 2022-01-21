@@ -1,41 +1,57 @@
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import colors from "../utils/style/colors";
 // logo imports
-import Yoga from '../assets/icons/zen.svg'
-import Swim from '../assets/icons/swim.svg'
-import Bike from '../assets/icons/bike.svg'
-import Gym from '../assets/icons/dumbell.svg'
+import Yoga from "../assets/icons/zen.svg";
+import Swim from "../assets/icons/swim.svg";
+import Bike from "../assets/icons/bike.svg";
+import Gym from "../assets/icons/dumbell.svg";
 
-const SportsGroup = styled.div `
-    width: 117px;
-    height: 90vh;
-    list-style-type: none; 
-    text-align: center;
-    background: black;
-    position: absolute;
-    p {
-        font-size: 12px;
-        transform: rotate(-90deg);
-        width: 165px;
-        font-weight: 500;
-        position: absolute;
-        left: -25px;
-        bottom: 80px;
-      }
-    img {
-        width: 64px;
-        margin: 10px;
-      }
+/**
+ * CSS for the component using styled.components
+ */
+const SportsGroup = styled.nav`
+  background: ${colors.secondary};
+
+  @media screen and (min-width: 1024px) {
+    margin-top: unset;
+    display: grid;
+    grid-template-rows: 6fr 2fr;
+    grid-template-columns: clamp(3.5rem,8vw,7.5rem);
+  }
+
+  img {
+    width: clamp(2.5rem, 4.5vw, 4rem);
+    margin-top: 15px;
+  }
 `;
 
-const SportLink = styled.div `
-    text-decoration: none;
-    cursor: pointer; 
-    display: flex;
+const SportLink = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 10px;
+
+  @media screen and (min-width: 1024px) {
+    height: 100%;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
-    height: 80vh;
+    align-items: center;
+  }
+`;
+
+const Copyright = styled.p `
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 500;
+    @media screen and (min-width: 1024px) {
+      align-items: center;
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      margin-bottom: 20px;
+      }
 `;
 
 /**
@@ -43,19 +59,16 @@ const SportLink = styled.div `
  * @function SideNav
  * @returns {JSX}
  */
-  export default function SideNav() {
-
-    return (
-      <SportsGroup>
-          <nav>
-              <SportLink>
-                <li><Link to='/user'><img className='coverImage' src={Yoga} alt='Yoga'/></Link> </li>
-                <li><Link to='/user'><img className='coverImage' src={Swim} alt='Swim'/></Link> </li>
-                <li><Link to='/user'><img className='coverImage' src={Bike} alt='Bike'/></Link> </li>
-                <li><Link to='/user'><img className='coverImage' src={Gym} alt='Gym'/></Link> </li>
-              </SportLink>
-          </nav>
-                <p>Copyright, SportSee 2020</p>
-      </SportsGroup>
-      )
-  }
+export default function SideNav() {
+  return (
+    <SportsGroup>  
+    <SportLink>
+      <Link to='/yoga'><img src={Yoga} alt='Yoga'/></Link>
+      <Link to='/swimming'><img src={Swim} alt='Swim'/></Link>
+      <Link to='/cycling'><img src={Bike} alt='Bike'/></Link>
+      <Link to='/gym'><img src={Gym} alt='Gym'/></Link>
+    </SportLink>       
+    <Copyright>Copyright, SportSee 2020</Copyright>
+    </SportsGroup>
+  );
+}

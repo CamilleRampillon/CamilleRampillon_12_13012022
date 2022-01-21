@@ -11,7 +11,6 @@ const colors = {
   barChartGridStroke: '#DEDEDE',
   barChartToolTip: '#C4C4C480',
   LineChartToolTip: 'blue',
-
 }
 
 export default colors

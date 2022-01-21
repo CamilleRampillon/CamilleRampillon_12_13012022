@@ -1,9 +1,9 @@
 import { useParams } from 'react-router'
 import PropTypes from 'prop-types'
-import { useFetch } from '../utils/hooks'
+import { useFetch } from '../utils/hooks/FetchData'
 import styled from 'styled-components'
 import colors from '../utils/style/colors'
-import LoadingIcon from '../components/LoadingIcon'
+import MiniLoadingIcon from '../utils/Loaders/MiniLoadingIcon'
 
 // import Rechart items
 import { 
@@ -19,22 +19,56 @@ import {
 /**
  * CSS for the component using styled.components
  */
-const AverageWrapper = styled.div`
-  height: 263px;
-  width: 258px;
-  margin: 15px;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.backgroundLight};
+  color: ${colors.secondary};
+  height: 225px;
+  width: 32%;
+  max-width: 258px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px 0px #00000005;
+  p {
+    padding: 10px;
+  }
+  @media screen and (min-width: 1025px) {
+    height: 263px;
+    }  
+
+  @media screen and (min-width: 1440px) {
+    height: 325px;
+    max-width: 325px;
+    } 
+`;
+
+const AverageWrapper = styled.article`
+  height: 225px;
+  width: 100%;
   border-radius: 5px;
   background: ${colors.primary};
+  box-shadow: 0px 2px 4px 0px #00000005;
+
+  @media screen and (min-width: 600px) {
+    width: 32%;
+    max-width: 258px;
+    }   
+
+  @media screen and (min-width: 1440px) {
+    height: 325px;
+    max-width: 325px;
+    }   
 `;
 
 const AverageHeading = styled.h2`
-    color: ${colors.tertiary};
-    opacity: 0.5;
-    font-size: 15px;
-    font-weight: 500;
-    width: 150px;
-    margin: 25px;
-    position: absolute;
+  color: ${colors.tertiary};
+  opacity: 0.5;
+  font-size: clamp(0.625rem, 1vw, 0.938rem);
+  font-weight: 500;
+  width: 150px;
+  margin: 25px;
+  position: absolute;
 `;
 
 const ToolTipLabel = styled.div`
@@ -49,7 +83,7 @@ const ToolTipLabel = styled.div`
 `;
 
 /**
- * Format day on X axis from number to letter
+ * Format day on Xaxis from number to letter
  * @function TranformDay
  * @param {number} tickItem
  * @returns {string} formattedDay
@@ -57,13 +91,11 @@ const ToolTipLabel = styled.div`
   function TranformDay(tickItem) {
     let formattedDay = ''
     const Day = [ 'L', 'M', 'M', 'J', 'V', 'S', 'D']
-
     if (tickItem) {
       formattedDay = Day[tickItem-1]
     }
     return formattedDay
   }
-
 /**
  * Displays the tooltip (minutes) information when user hovers on the line chart
  * @function CustomTooltip
@@ -81,7 +113,7 @@ const ToolTipLabel = styled.div`
     }
     return null;
   }
-
+  
 /**
  * Fetch() the user's data for their Average Sessions
  * Display it on a Line Chart
@@ -91,36 +123,35 @@ const ToolTipLabel = styled.div`
 export default function Average() {
   // Get ID from URL param
   const { id } = useParams()
-
+    
     const mockAverageData = `../${id}/average-sessions.json`
-
     // const sessions = `http://localhost:3000/user/${id}/average-sessions`
-
+  
     // Fetch the data using HOOK useFetch
     // @returns @param {object} data, {boolean} isLoading and {boolean} error
     const { data, isLoading, error } = useFetch(mockAverageData)
-
     if (error) {
-      return <span>Il y a un problème</span>
-    }
-
-    if (isLoading) {
-        return (
-          <LoadingIcon />
+      return (
+        <Wrapper>
+          <p>Aucune donnée n'a été trouvée</p>
+        </Wrapper>
         )
+    }
+    if (isLoading) {
+      return (
+        <Wrapper>
+          <MiniLoadingIcon />
+        </Wrapper>
+      )
     }
     else {
       const sessions = data.data.sessions
-console.log(sessions)
     // Display Line chart using RECHARTS
     return (
       <AverageWrapper>
         <AverageHeading>Durée moyenne des sessions</AverageHeading>
-
         <ResponsiveContainer width="100%" height="100%"> 
           <LineChart
-            // width={500}
-            // height={100}
             data={sessions}
             margin={{
               top: 0,
@@ -128,12 +159,10 @@ console.log(sessions)
               left: -53,
               bottom: 0,
             }} >
-
             <CartesianGrid
               strokeDasharray="0" 
               horizontal={false} 
               vertical={false} />
-
             <XAxis 
               dataKey="day"
               tickLine={false}
@@ -141,21 +170,19 @@ console.log(sessions)
               tickFormatter={TranformDay}
               stroke={`${colors.tertiary}`}
               style={{ fontSize: '12px', fontWeight: '500', opacity: '0.5',}} />
-
             <YAxis 
               dataKey="sessionLength"
               axisLine={false}
               tickLine={false}
               tick={false}  
               domain={['dataMin -2', 'dataMax + 20']}/>
-
             <Tooltip 
                 content={<CustomTooltip />}
                 cursor={{ 
                 stroke: `${colors.secondary}`,
                 strokeOpacity: 0.1, 
                 strokeWidth: '45',}}/>
-
+            
             <Line type="monotone" 
               dataKey="sessionLength" 
               stroke={`${colors.tertiary}`} 
@@ -164,19 +191,15 @@ console.log(sessions)
               dot={false}
               activeDot={{ r: 3, strokeWidth: 9, strokeOpacity: 0.3, }} />
           </LineChart>
-
         </ResponsiveContainer>
       </AverageWrapper>   
     )
   }
 }
-
-//  Prototypes
-
+//  Proptypes
 TranformDay.propTypes = {
   tickItem: PropTypes.number.isRequired,
 }
-
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.array,
