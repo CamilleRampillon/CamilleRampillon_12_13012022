@@ -59,7 +59,7 @@ const Copyright = styled.p `
  * @function SideNav
  * @returns {JSX}
  */
-export default function SideNav() {
+ const SideNav = () => {
   return (
     <SportsGroup>  
     <SportLink>
@@ -72,3 +72,5 @@ export default function SideNav() {
     </SportsGroup>
   );
 }
+
+export default SideNav

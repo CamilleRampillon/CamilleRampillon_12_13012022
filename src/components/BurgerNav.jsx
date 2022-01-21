@@ -84,7 +84,7 @@ const StyledBurger = styled.button`
  * @function BurgerNav
  * @returns {JSX}
  */
- export function BurgerNav() {
+ const BurgerNav = () => {
   const [open, setOpen] = useState(false);
   return (
     <HamburgerWrapper>
@@ -103,3 +103,5 @@ const StyledBurger = styled.button`
     </HamburgerWrapper>
   )
 }
+
+export default BurgerNav;

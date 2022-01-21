@@ -16,12 +16,12 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     /* margin: 0; */
+    height: 100%;
     font-family: 'Roboto', 'Montserrat', 'Segoe UI', 'Oxygen', sans-serif;
     -webkit-font-smoothing: antialiased;
     color: ${colors.tertiary};
     margin: auto;
     box-sizing: border-box;
-    height: 100%;
   }
 
   ul {

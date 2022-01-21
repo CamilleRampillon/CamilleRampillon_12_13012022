@@ -8,6 +8,7 @@ import Activity from '../components/Activity'
 import KeyData from '../components/KeyData'
 import Average from '../components/Average'
 import Performance from '../components/Performance'
+import Score from '../components/Score'
 
 
 /**
@@ -56,31 +57,13 @@ const Analysis = styled.div`
       margin-top: 70px;
     }  
 `;
-// THIS IS TEMPORARY FOR DUMMY CHARTS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! before 225px eight initial
-const CONTAINER = styled.article`
-  height: 225px;
-  width: 100%;
-  border-radius: 5px;
-  background: blue;
-  box-shadow: 0px 2px 4px 0px #00000005;
-    @media screen and (min-width: 600px) {
-      width: 32%;
-      max-width: 258px;
-      }  
-    // @media screen and (min-width: 1025px) {
-    //   height: 263px;
-    //   } 
-    @media screen and (min-width: 1440px) {
-      height: 325px;
-      max-width: 325px;
-      } 
-`;
+
 /**
  * Renders the Dashboard of a user with all their stats
  * @function DashBoard
  * @returns {JSX}
  */
-export default function DashBoard() {
+ const DashBoard = () => {
  
   const { id } = useParams()
 
@@ -113,7 +96,7 @@ export default function DashBoard() {
                 <Analysis>          
                   <Average />
                   <Performance />
-                  <CONTAINER />
+                  <Score />
                 </Analysis>
             </Stats>
             <KeyDataWrapper>
@@ -124,3 +107,5 @@ export default function DashBoard() {
     )
   }
 }
+
+export default DashBoard

@@ -31,7 +31,7 @@ const HeadingWrapper = styled.div`
  * @param {string} text: short sentence
  * @returns {JSX}
  */
-const Title = ({ intro, highlightedText, text }) => {
+ const Title = ({ intro, highlightedText, text }) => {
   return (
     <HeadingWrapper>
       <h1>{intro} <span>{highlightedText}</span></h1>   
@@ -42,8 +42,7 @@ const Title = ({ intro, highlightedText, text }) => {
 
 export default Title
 
-// Prototypes
-
+// Proptypes
 Title.propTypes = {
   intro: PropTypes.string,
   highlightedText: PropTypes.string,

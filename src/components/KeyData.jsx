@@ -10,7 +10,7 @@ import carbs from '../assets/icons/carbs.svg';
  * CSS for the component using styled.components
  */
 const HealthWrapper = styled.div`
-  color: ${colors.HealthDataText};
+  color: ${colors.NumberText};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,7 +75,7 @@ const HealthValue = styled.div`
  * @param {object} healthData: holds users health data
  * @returns {JSX}
  */
-export default function KeyData({ healthData }) {
+ const KeyData = ({ healthData }) => {
   const categories = ['Calories', 'Protéines', 'Glucides', 'Lipides'];
   const icons = [calories, protiens, fats, carbs];
   return (
@@ -93,7 +93,10 @@ export default function KeyData({ healthData }) {
     </HealthWrapper>
   );
 }
-// Prototypes
+
+export default KeyData
+
+// Proptypes
 KeyData.propTypes = {
   healthData: PropTypes.object.isRequired,
 };

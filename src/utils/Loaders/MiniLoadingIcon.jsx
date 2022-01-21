@@ -18,10 +18,13 @@ const rotate = keyframes`
  */
 const Loader = styled.div`
   padding: 15px;
-  border: 8px solid ${colors.primary};
+  border: 8px solid ${colors.SecondaryText};
   animation: ${rotate} 1s infinite linear;
   border-bottom-color: transparent;
   border-radius: 106px;
+  ${(props) =>
+    props.$isFullLink &&
+    `color: white; border-radius: 30px; background-color: ${colors.primary};`}
 `;
 
 /**
@@ -30,8 +33,10 @@ const Loader = styled.div`
  * @function MiniLoadingIcon
  * @returns {JSX}
  */
-export default function MiniLoadingIcon() {
+ const MiniLoadingIcon = () => {
     return (
           <Loader />
     )
 }
+
+export default MiniLoadingIcon

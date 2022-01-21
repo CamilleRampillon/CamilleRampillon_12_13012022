@@ -45,8 +45,8 @@ const ActivityHeading = styled.div`
   font-size: clamp(0.625rem, 0.972vw, 1rem);
   font-weight: 500;
   h2 {
-    color: ${colors.secondary};
-    font-size: clamp(0.75rem, 1.042vw, 1.125rem);
+    color: ${colors.H2HeadingText};
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
     font-weight: 500;
     margin-left: 5px;
 
@@ -61,7 +61,7 @@ const ActivityLegend = styled.div`
   display: flex;
   align-items: center;
   margin-right: 5px;
-
+  color: ${colors.SecondaryText};
   @media screen and (min-width: 375px) {
     margin-right: 35px;
   }  
@@ -70,7 +70,7 @@ const ActivityLegend = styled.div`
 const BulletOne = styled.span`
   font-size: 40px;
   font-weight: 500;
-  color: ${colors.primary};
+  color: ${colors.NumberText};
   margin-bottom: 8px;
   margin-left: 15px;
   margin-right: 5px;
@@ -97,10 +97,10 @@ const ToolTipLabel = styled.div`
  * Format date on Xaxis from yyyy-mm-dd to dd/mm
  * @function TranformDate
  * @param {string} tickItem
- * @returns {string} formattedDate
+ * @returns {string} formatted Date
  */
-function TranformDate(tickItem) {
-  let formattedDate = ''
+ const TranformDate = (tickItem) => {
+  let formattedDate = '';
   if (tickItem) {
     let parts = tickItem.split('-')
     formattedDate = `${parts[1]}/${parts[2]}`
@@ -130,9 +130,9 @@ const CustomTooltip = ({ active, payload }) => {
  * Fetch() the user's data for their Activities
  * Display it in a BarChart with Weight & Calories burned
  * @function Activity
- * @returns {JSX} Activity Bar chart
+ * @returns {JSX}
  */
-export default function Activity() {
+ const Activity = () => {
   // Get ID from URL param
   const { id } = useParams()
   const mockActivityData = `../${id}/activity.json`;
@@ -220,6 +220,9 @@ export default function Activity() {
     );
   }
 }
+
+export default Activity
+
 // Proptypes
 TranformDate.propTypes = {
   tickItem: PropTypes.string.isRequired ,

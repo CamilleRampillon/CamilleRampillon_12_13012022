@@ -35,7 +35,7 @@ const ReturnLink = styled(Link) `
  * @function Error
  * @returns {JSX}
  */
-export default function Error() {
+ const Error = () => {
   
   return (
     <ErrorWrapper>
@@ -45,3 +45,5 @@ export default function Error() {
     </ErrorWrapper>
   )
 }
+
+export default Error
