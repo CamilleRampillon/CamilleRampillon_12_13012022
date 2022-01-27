@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Prerequisites
+ - NodeJS Version 16.13.0
+ - Yarn Version 1.22.11
+ - Visual Studio Code or another IDE of your choice
 
-### `npm start`
+### Dependencies
+ - React Version 17.0.2
+ - React-router-dom Version 5.2.0
+ - Prop-types Version 15.7.2
+ - Styled-components Version 5.3.3
+ - Recharts Version 2.1.6
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Setup's steps
 
-### `npm test`
+1 - Backend API
+ - Clone the Backend API on your computer:
+    git clone https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - Install the packages/dependencies : yarn install
 
-### `npm run build`
+ - Run the Backend Api, which will then listen on port 3000 by default : yarn start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ - In the terminal window, you will see the message Magic happens on port 3000.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2 - Frontend App
+ - Clone the Frontend App on your computer:
+    git clone https://github.com/CamilleRampillon/CamilleRampillon_12_13012022.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ - Install the packages/dependencies : npm install
 
-### `npm run eject`
+ - Run the Backend Api, which will then listen on port 3000 by default : npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ - In the terminal window, you will see the message :
+    ? something is already running on port 3000. Would you like to run the app on another port instead >> (Y/n)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ - Type Y
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+ - The App runs on http://localhost:3001/
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Warning !** Currently only 2 users have been mocked. They have userId 12 and 18 respectively.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
