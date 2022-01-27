@@ -1,4 +1,5 @@
 // colors used on the website
+
 const colors = {
   primary: '#FF0000',
   secondary: '#000',
@@ -10,7 +11,7 @@ const colors = {
   H2HeadingText: '#20253A',
   SecondaryText: '#74798c',
   NumberText: ' #282D30',
-
+  
    //bar chart
   barChartText: '#9B9EAC',
   barChartGridStroke: '#DEDEDE',

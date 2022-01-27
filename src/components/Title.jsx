@@ -1,7 +1,6 @@
-
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import colors from '../utils/style/colors'
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import colors from "../utils/style/colors";
 
 /**
  * CSS for component using styled.components
@@ -9,19 +8,19 @@ import colors from '../utils/style/colors'
 const HeadingWrapper = styled.div`
   color: ${colors.secondary};
   margin-bottom: 2.188rem;
-    h1 {
-      font-size: clamp(1.5rem, 3vw, 3rem);
-      font-style: normal;
-      font-weight: 500;
-      margin: unset;
-    }
-    p {
-      font-size: clamp(0.75rem, 1.250vw, 1.125rem);
-      font-weight: 400;
-    }
-    span {
-      color: ${colors.primary};
-    }
+  h1 {
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-style: normal;
+    font-weight: 500;
+    margin: unset;
+  }
+  p {
+    font-size: clamp(0.75rem, 1.25vw, 1.125rem);
+    font-weight: 400;
+  }
+  span {
+    color: ${colors.primary};
+  }
 `;
 
 /**
@@ -31,20 +30,22 @@ const HeadingWrapper = styled.div`
  * @param {string} text: short sentence
  * @returns {JSX}
  */
- const Title = ({ intro, highlightedText, text }) => {
+const Title = ({ intro, highlightedText, text }) => {
   return (
     <HeadingWrapper>
-      <h1>{intro} <span>{highlightedText}</span></h1>   
+      <h1>
+        {intro} <span>{highlightedText}</span>
+      </h1>
       <p>{text}</p>
     </HeadingWrapper>
-  )
-}
+  );
+};
 
-export default Title
+export default Title;
 
 // Proptypes
 Title.propTypes = {
   intro: PropTypes.string,
   highlightedText: PropTypes.string,
   text: PropTypes.string,
-}
+};

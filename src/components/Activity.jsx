@@ -1,9 +1,11 @@
-import { useParams } from 'react-router';
-import PropTypes from 'prop-types';
-import { useFetch } from '../utils/hooks/FetchData';
-import styled from 'styled-components';
-import colors from '../utils/style/colors';
-import MiniLoadingIcon from '../utils/Loaders/MiniLoadingIcon';
+import { useParams } from "react-router";
+import PropTypes from "prop-types";
+import { useFetch } from "../utils/Service/FetchData";
+import styled from "styled-components";
+import colors from "../utils/style/colors";
+import MiniLoadingIcon from "../utils/Loaders/MiniLoadingIcon";
+// import a function to have the correct format for the date
+import { TranformDate } from "../utils/HelperFunctions/Formatters";
 
 // import Rechart items
 import {
@@ -14,102 +16,82 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from 'recharts'
+} from "recharts";
 
 /**
  * CSS for component using styled.components
  */
- const Wrapper = styled.div`
- display: flex;
- align-items: center;
- justify-content: center;
- color: ${colors.secondary};
- background: ${colors.backgroundLight};
- height: 290px;
- border-radius: 5px;
- box-shadow: 0px 2px 4px 0px #00000005;
-`;
-
 const ActivityChartWrapper = styled.article`
   background: ${colors.backgroundLight};
-  height: 290px;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px 0px #00000005;
+  border-radius: 0.313rem;
+  box-shadow: 0rem 0.125rem 0.25rem 0rem #00000005;
+  height: 18.125rem;
+`;
+
+const Wrapper = styled(ActivityChartWrapper)`
+  align-items: center;
+  color: ${colors.secondary};
+  display: flex;
+  justify-content: center;
 `;
 
 const ActivityHeading = styled.div`
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: ${colors.SecondaryText};
+  display: flex;
   font-size: clamp(0.625rem, 0.972vw, 1rem);
   font-weight: 500;
+  justify-content: space-between;
   h2 {
     color: ${colors.H2HeadingText};
     font-size: clamp(1rem, 1.2vw, 1.125rem);
     font-weight: 500;
-    margin-left: 5px;
-
+    margin-left: 0.313rem;
     @media screen and (min-width: 375px) {
-      margin-left: 35px;
-      margin-right: 35px;
-    }  
+      margin-left: 2.188rem;
+      margin-right: 2.188rem;
+    }
   }
 `;
 
 const ActivityLegend = styled.div`
-  display: flex;
   align-items: center;
-  margin-right: 5px;
   color: ${colors.SecondaryText};
+  display: flex;
+  margin-right: 0.313rem;
   @media screen and (min-width: 375px) {
-    margin-right: 35px;
-  }  
+    margin-right: 2.188rem;
+  }
 `;
 
 const BulletOne = styled.span`
-  font-size: 40px;
+  color: ${colors.primary};
+  font-size: 2.5rem;
   font-weight: 500;
-  color: ${colors.NumberText};
-  margin-bottom: 8px;
-  margin-left: 15px;
-  margin-right: 5px;
+  margin-bottom: 0.5rem;
+  margin-left: 0.938rem;
+  margin-right: 0.313rem;
 `;
 
 const BulletTwo = styled.span`
-  font-size: 40px;
+  color: ${colors.NumberText};
+  font-size: 2.5rem;
   font-weight: 500;
-  color: ${colors.secondary};
-  margin-bottom: 8px;
-  margin-left: 15px;
-  margin-right: 5px;
+  margin-bottom: 0.5rem;
+  margin-left: 0.938rem;
+  margin-right: 0.313rem;
 `;
 
 const ToolTipLabel = styled.div`
-  color: ${colors.tertiary};
   background: ${colors.primary};
-  font-size: 7px;
+  color: ${colors.tertiary};
+  font-size: 0.438rem;
   font-weight: 500;
-  padding: 5px;
+  margin: 0.313rem;
+  padding: 0.313rem;
 `;
 
 /**
- * Format date on Xaxis from yyyy-mm-dd to dd/mm
- * @function TranformDate
- * @param {string} tickItem
- * @returns {string} formatted Date
- */
- const TranformDate = (tickItem) => {
-  let formattedDate = '';
-  if (tickItem) {
-    let parts = tickItem.split('-')
-    formattedDate = `${parts[1]}/${parts[2]}`
-  }
-  return formattedDate
-}
-
-/**
- * Displays the tooltip (kg/kCal) information when user hovers on barchart
+ * Renders the tooltip (kg/kCal) information when user hovers on barchart
  * @function CustomTooltip
  * @param {boolean} active: inital value false / becomes true when hover on barchart
  * @param {array} payload: contains data to be displayed on hover
@@ -122,36 +104,37 @@ const CustomTooltip = ({ active, payload }) => {
         <p>{`${payload[0].value} kCal`}</p>
         <p>{`${payload[1].value} Kg`}</p>
       </ToolTipLabel>
-    )
+    );
   }
   return null;
 };
+
 /**
- * Fetch() the user's data for their Activities
- * Display it in a BarChart with Weight & Calories burned
+ * Renders Activities BarChart with Weight & Calories burned
  * @function Activity
  * @returns {JSX}
  */
- const Activity = () => {
+const Activity = () => {
   // Get ID from URL param
-  const { id } = useParams()
-  const mockActivityData = `../${id}/activity.json`;
-  // const activity =`http://localhost:3000/user/${id}/activity`
-  // Fetch the data using HOOK useFetch
+  const { id } = useParams();
+
+  // Fetch the data using (custom hook) useFetch
   // @returns @param {object} data, {boolean} isLoading and {boolean} error
-  const { data, isLoading, error } = useFetch(mockActivityData);
+  const { data, isLoading, error } = useFetch(id, "activity");
+
   if (error) {
-    return <Wrapper>Aucune donnée n'a été trouvée</Wrapper>
+    return <Wrapper>Aucune donnée n'a été trouvée</Wrapper>;
   }
   if (isLoading) {
     return (
       <Wrapper>
         <MiniLoadingIcon />
       </Wrapper>
-    )
+    );
   } else {
     const sessions = data.data.sessions;
     // Display Activity chart using RECHARTS
+
     return (
       <ActivityChartWrapper>
         <ActivityHeading>
@@ -161,73 +144,86 @@ const CustomTooltip = ({ active, payload }) => {
             <BulletOne>•</BulletOne> Calories brûlées (kCal)
           </ActivityLegend>
         </ActivityHeading>
-        <ResponsiveContainer width='100%' height={250}>
+
+        <ResponsiveContainer width="100%" height={250}>
           <BarChart
-            data={sessions}
             margin={{
               top: 20,
               right: 0,
               left: 0,
               bottom: 30,
             }}
-            barGap={5} >
+            barGap={5}
+            data={sessions}
+          >
             <XAxis
-              dataKey='day'
+              dataKey="day"
               tickFormatter={TranformDate}
               stroke={`${colors.barChartText}`}
-              tickLine={false} 
-              style={{ fontSize: '14px', }} />
+              tickLine={false}
+              style={{ fontSize: "14px" }}
+            />
+
             <YAxis
-              yAxisId='poids'
+              yAxisId="poids"
               stroke={`${colors.barChartText}`}
-              orientation='right'
+              orientation="right"
               axisLine={false}
               tickLine={false}
-              domain={['dataMin -3', 'dataMax + 3']}
-              style={{
-                fontSize: '14px',
-              }} />
+              tickCount="3"
+              type="number"
+              domain={["dataMin -3", "auto"]}
+              style={{ fontSize: "14px" }}
+            />
+
             <YAxis
-              yAxisId='calories'
+              yAxisId="calories"
               tick={false}
-              orientation='left'
+              orientation="left"
               axisLine={false}
               tickLine={false}
-              domain={['dataMin -10', 'dataMax + 10']}  />
+              domain={["dataMin -10", "dataMax + 10"]}
+            />
+
             <Tooltip
+              dy={4}
               content={<CustomTooltip />}
-              cursor={{ fill: `${colors.barChartToolTip}` }} />
+              cursor={{ fill: `${colors.barChartToolTip}` }}
+            />
+
             <CartesianGrid
               stroke={`${colors.barChartGridStroke}`}
-              vertical={false} />
+              vertical={false}
+            />
+
             <Bar
-              yAxisId='calories'
-              name='kCal'
-              dataKey='calories'
+              yAxisId="calories"
+              name="kCal"
+              dataKey="calories"
               fill={`${colors.secondary}`}
               barSize={8}
-              radius={[50, 50, 0, 0]} />
+              radius={[50, 50, 0, 0]}
+            />
+
             <Bar
-              yAxisId='poids'
-              name='kg'
-              dataKey='kilogram'
+              yAxisId="poids"
+              name="kg"
+              dataKey="kilogram"
               fill={`${colors.primary}`}
               barSize={8}
-              radius={[50, 50, 0, 0]} />
+              radius={[50, 50, 0, 0]}
+            />
           </BarChart>
         </ResponsiveContainer>
       </ActivityChartWrapper>
     );
   }
-}
+};
 
-export default Activity
+export default Activity;
 
 // Proptypes
-TranformDate.propTypes = {
-  tickItem: PropTypes.string.isRequired ,
-}
 CustomTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.array,
-}
+};

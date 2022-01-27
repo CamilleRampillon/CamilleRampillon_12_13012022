@@ -17,10 +17,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={WelcomePage}/>
           <Route path="/user/:id" component={DashBoard}/>
-          <Route path="/profile" component={WelcomePage}/>
-          <Route path="/settings" component={WelcomePage}/>
-          <Route path="/community" component={WelcomePage}/>
-          <Route component={Error}/>
+          <Route component={Error} />
         </Switch> 
     </Router>  
   )

@@ -11,24 +11,19 @@ import reportWebVitals from './reportWebVitals';
 const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
-    min-height: 100vh; 
   }
-
-  body {
-    /* margin: 0; */
+  body {  
     height: 100%;
     font-family: 'Roboto', 'Montserrat', 'Segoe UI', 'Oxygen', sans-serif;
     -webkit-font-smoothing: antialiased;
     color: ${colors.tertiary};
     margin: auto;
     box-sizing: border-box;
-  }
-
+  } 
   ul {
     margin: 0;
     padding: 0;
   }
-  
   li {
     list-style-type: none;
   }
@@ -45,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     position: absolute;
     width: 1px;
-}
+  }
 `;
 
 ReactDOM.render(
